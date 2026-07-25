@@ -8,7 +8,6 @@
         "pxt-nezha2": "github:elecfreaks/pxt-nezha2#v1.2.3"
     },
     "files": [
-        "main.blocks",
         "main.ts",
         "README.md"
     ],
