@@ -24,10 +24,12 @@ basic.forever(function () {
     } else {
         steer = Math.map(x, 0, 1023, 100, -100)
     }
-    if (y > 470 && y < 555) {
-        throttle = 0
+    if (y > 555) {
+        throttle = Math.map(y, 555, 1023, 25, 100)
+    } else if (y < 470) {
+        throttle = Math.map(y, 470, 0, -25, -100)
     } else {
-        throttle = Math.map(y, 0, 1023, -100, 100)
+        throttle = 0
     }
     if (throttle == 0 && steer == 0) {
         nezhaV2.comboStop()
