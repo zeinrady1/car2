@@ -15,9 +15,9 @@ let y = 0
 let x = 0
 x = 512
 y = 512
-radio.setGroup(4)
-radio.setFrequencyBand(1)
-nezhaV2.setComboMotor(nezhaV2.MotorPostion.M1, nezhaV2.MotorPostion.M2)
+radio.setGroup(1)
+radio.setFrequencyBand(4)
+nezhaV2.setComboMotor(nezhaV2.MotorPostion.M4, nezhaV2.MotorPostion.M1)
 basic.forever(function () {
     if (x > 500 && x < 525 && y > 500 && y < 525) {
         nezhaV2.comboStop()
