@@ -23,7 +23,7 @@ basic.forever(function () {
         nezhaV2.comboStop()
     } else {
         throttle = Math.map(y, 0, 1023, -100, 100)
-        steer = Math.map(x, 0, 1023, -100, 100)
+        steer = Math.map(x, 0, 1023, 100, -100)
         leftSpeed = throttle + steer
         rightSpeed = throttle - steer
         if (leftSpeed > 100) {
