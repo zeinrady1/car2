@@ -6,24 +6,16 @@ radio.onReceivedValue(function (name, value) {
         y = value
     }
     if (name == "b") {
-        turbo = true
-        basic.showString("T")
-    }
-    if (name == "n") {
-        turbo = false
-        basic.clearScreen()
+        if (value == 5) {
+            turbo = true
+            basic.showString("T")
+        }
+        if (value == 4) {
+            turbo = false
+            basic.clearScreen()
+        }
     }
     serial.writeValue(name, value)
-})
-radio.onReceivedString(function (receivedString) {
-    if (receivedString == "b") {
-        turbo = true
-        basic.showString("T")
-    }
-    if (receivedString == "n") {
-        turbo = false
-        basic.clearScreen()
-    }
 })
 let speed = 0
 let target = 0
