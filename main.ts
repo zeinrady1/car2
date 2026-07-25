@@ -19,11 +19,19 @@ radio.setGroup(1)
 radio.setFrequencyBand(4)
 nezhaV2.setComboMotor(nezhaV2.MotorPostion.M4, nezhaV2.MotorPostion.M1)
 basic.forever(function () {
-    if (x > 500 && x < 525 && y > 500 && y < 525) {
-        nezhaV2.comboStop()
+    if (x > 470 && x < 555) {
+        steer = 0
+    } else {
+        steer = Math.map(x, 0, 1023, 100, -100)
+    }
+    if (y > 470 && y < 555) {
+        throttle = 0
     } else {
         throttle = Math.map(y, 0, 1023, -100, 100)
-        steer = Math.map(x, 0, 1023, 100, -100)
+    }
+    if (throttle == 0 && steer == 0) {
+        nezhaV2.comboStop()
+    } else {
         leftSpeed = throttle + steer
         rightSpeed = throttle - steer
         if (leftSpeed > 100) {
