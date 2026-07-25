@@ -5,8 +5,27 @@ radio.onReceivedValue(function (name, value) {
     if (name == "y") {
         y = value
     }
+    if (name == "b") {
+        turbo = !(turbo)
+        if (turbo) {
+            basic.showString("T")
+        } else {
+            basic.clearScreen()
+        }
+    }
     serial.writeValue(name, value)
 })
+radio.onReceivedString(function (receivedString) {
+    if (receivedString == "b") {
+        turbo = !(turbo)
+        if (turbo) {
+            basic.showString("T")
+        } else {
+            basic.clearScreen()
+        }
+    }
+})
+let turbo = false
 let rightSpeed = 0
 let leftSpeed = 0
 let steer = 0
@@ -30,6 +49,14 @@ basic.forever(function () {
         throttle = Math.map(y, 470, 0, -25, -100)
     } else {
         throttle = 0
+    }
+    if (turbo) {
+        if (throttle > 0) {
+            throttle = 100
+        }
+        if (throttle < 0) {
+            throttle = -100
+        }
     }
     if (throttle == 0 && steer == 0) {
         nezhaV2.comboStop()
