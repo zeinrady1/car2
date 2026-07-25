@@ -25,11 +25,12 @@ radio.onReceivedString(function (receivedString) {
         }
     }
 })
+let speed = 0
+let target = 0
 let turbo = false
 let rightSpeed = 0
 let leftSpeed = 0
 let steer = 0
-let throttle = 0
 let y = 0
 let x = 0
 x = 512
@@ -44,25 +45,37 @@ basic.forever(function () {
         steer = Math.map(x, 0, 1023, 100, -100)
     }
     if (y > 555) {
-        throttle = Math.map(y, 555, 1023, 25, 100)
+        target = Math.map(y, 555, 1023, 25, 100)
     } else if (y < 470) {
-        throttle = Math.map(y, 470, 0, -25, -100)
+        target = Math.map(y, 470, 0, -25, -100)
     } else {
-        throttle = 0
+        target = 0
     }
     if (turbo) {
-        if (throttle > 0) {
-            throttle = 100
+        if (target > 0) {
+            target = 100
         }
-        if (throttle < 0) {
-            throttle = -100
+        if (target < 0) {
+            target = -100
         }
     }
-    if (throttle == 0 && steer == 0) {
+    if (speed < target) {
+        speed = speed + 5
+        if (speed > target) {
+            speed = target
+        }
+    }
+    if (speed > target) {
+        speed = speed - 5
+        if (speed < target) {
+            speed = target
+        }
+    }
+    if (speed == 0 && steer == 0) {
         nezhaV2.comboStop()
     } else {
-        leftSpeed = throttle + steer
-        rightSpeed = throttle - steer
+        leftSpeed = speed + steer
+        rightSpeed = speed - steer
         if (leftSpeed > 100) {
             leftSpeed = 100
         }
